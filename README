@@ -1,0 +1,8 @@
+input --> conversion --> OUTPUT
+
+Camera --> model --> servo
+
+camera --> model --> servo -->|
+|                             |
+|                             |
+^------------------------------
