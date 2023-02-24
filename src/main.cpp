@@ -14,7 +14,7 @@ void setup() {
 void loop() {
   M5.Lcd.setCursor(0, 0, 4);
   char buf[100];
-  sprintf(buf, "counter: %04d", counter);
+  sprintf(buf, "Counter: %d", counter);
   M5.Lcd.println(buf);
   delay(5000);
   counter++;
