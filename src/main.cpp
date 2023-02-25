@@ -39,6 +39,8 @@ void setup() {
 
   pinMode(sensorPin, INPUT);  // Sets the specified pin to input mode.
 
+  // M5.Lcd.setBrightness(0);
+  M5.Axp.SetLcdVoltage(2500);
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
   M5.Lcd.drawString("Servo Monitor", 0, 0, 4);
 
@@ -93,6 +95,8 @@ void loop() {
     // M5.Lcd.println("Sleeping...");
     // M5.setWakeupButton();  
     // M5.Lcd.sleep();
+    M5.Axp.SetLcdVoltage(3300);
+    // M5.Lcd.setBrightness(10);
   }
   
   // first sensor value
