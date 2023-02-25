@@ -74,18 +74,22 @@ void loop() {
 
   M5.Lcd.setCursor(0, INFO_HEIGHT_POS, 4);
   char buf[50];
-  sprintf(buf, "Raw Pot: %04d%", cur_sensorValue);
+  sprintf(buf, "Raw Pot:  %04d%", cur_sensorValue);
   M5.Lcd.println(buf);
 
-  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 20, 4);
+  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 25, 4);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
+  M5.Lcd.println(buf);
+
+  const float powerTemp = M5.Axp.GetTempInAXP192();
+  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 50, 4);
+  sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
   M5.Lcd.println(buf);
 
   // first sensor value
   servo_angle_write(0, normalVal);
   servo_angle_write(15, normalVal);
 
-  
   delay(500);
   // M5.Lcd.clearDisplay();
 }
