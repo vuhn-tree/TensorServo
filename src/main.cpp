@@ -68,6 +68,8 @@ void servo_angle_write(uint8_t n, int Angle) {
 }
 
 void loop() {
+   M5.update();
+
   // mapped to pot
   cur_sensorValue = analogRead(sensorPin);  // read the value from the sensor.
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
@@ -86,10 +88,23 @@ void loop() {
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
   M5.Lcd.println(buf);
 
+  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 75, 4);
+  M5.Lcd.printf("Button A: %d ",M5.BtnA.read());
+
+  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 100, 4);
+  if(M5.BtnA.read()) {
+    
+    M5.Lcd.println("Sleeping...");
+    M5.shutdown();  
+    // M5.Lcd.sleep();
+  } else {
+    M5.Lcd.println("");
+  }
+  
   // first sensor value
   servo_angle_write(0, normalVal);
   servo_angle_write(15, normalVal);
 
-  delay(500);
+  delay(1000);
   // M5.Lcd.clearDisplay();
 }
