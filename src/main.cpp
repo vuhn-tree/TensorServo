@@ -66,5 +66,5 @@ void loop() {
   servo_angle_write(0, normalVal);
   servo_angle_write(15, normalVal);
 
-  delay(50);
+  delay(100);
 }
