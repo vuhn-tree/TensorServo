@@ -15,7 +15,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
         // pulse of 512
 #define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
 
-const int INFO_HEIGHT_POS = 20;
+const int INFO_HEIGHT_POS = 25;
 
 /**
  * Port A: ??
@@ -39,9 +39,8 @@ void setup() {
 
   pinMode(sensorPin, INPUT);  // Sets the specified pin to input mode.
 
-  M5.Lcd.setCursor(100, 0, 4);
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
-  M5.Lcd.print("Servo Core");
+  M5.Lcd.drawString("Servo Monitor", 0, 0, 4);
 
   // dacWrite(25, 0);
 }
@@ -71,7 +70,7 @@ void loop() {
    M5.update();
 
   // mapped to pot
-  cur_sensorValue = analogRead(sensorPin);  // read the value from the sensor.
+  cur_sensorValue = analogRead(sensorPin);
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
 
   char buf[50];
