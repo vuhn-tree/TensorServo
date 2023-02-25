@@ -69,16 +69,17 @@ void loop() {
   M5.Lcd.setCursor(100, 100, 4);
   char buf[20];
   sprintf(buf, "Raw Pot: %d%", cur_sensorValue);
-  M5.Lcd.print(buf);
+  M5.Lcd.println(buf);
 
   M5.Lcd.setCursor(100, 120, 4);
   sprintf(buf, "Norm Pot: %d%", normalVal);
-
+  M5.Lcd.println(buf);
+  
   // first sensor value
   servo_angle_write(0, normalVal);
   servo_angle_write(15, normalVal);
 
   
   delay(10);
-  M5.Lcd.clear();
+  // M5.Lcd.clear();
 }
