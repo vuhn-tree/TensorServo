@@ -101,8 +101,8 @@ void loop() {
   
   // first sensor value
   servo_angle_write(0, normalVal);
-  servo_angle_write(15, normalVal);
+  // servo_angle_write(15, normalVal);
 
-  delay(1000);
+  delay(100);
   // M5.Lcd.clearDisplay();
 }
