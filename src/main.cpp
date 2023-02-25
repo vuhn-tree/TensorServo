@@ -1,7 +1,7 @@
 // #include <Arduino.h>
 #include <M5Core2.h>
 #include <Wire.h>
-
+// #include <string> 
 #include "Adafruit_PWMServoDriver.h"
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
@@ -16,7 +16,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
         // pulse of 512
 #define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
 
-const int INFO_HEIGHT_POS = 80;
+const int INFO_HEIGHT_POS = 20;
 
 int sensorPin = 36;          // set the input pin for the potenti ometer.
 int last_sensorValue = 100;  // Stores the value last read by the sensor.
@@ -70,12 +70,15 @@ void loop() {
 
   M5.Lcd.setCursor(0, INFO_HEIGHT_POS, 4);
   char buf[50];
-  sprintf(buf, "Raw Pot: %d%", cur_sensorValue);
+  sprintf(buf, "Raw Pot: %04d%", cur_sensorValue);
   M5.Lcd.println(buf);
 
   M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 20, 4);
-  sprintf(buf, "Norm Pot: %d%", normalVal);
+  sprintf(buf, "Norm Pot: %03d%", normalVal);
   M5.Lcd.println(buf);
+
+  // std::string foo = "hello: " + std::toString(normalVal);
+  // M5.Lcd.println(foo);
   
   // first sensor value
   servo_angle_write(0, normalVal);
@@ -83,5 +86,5 @@ void loop() {
 
   
   delay(500);
-  // M5.Lcd.clear();
+  // M5.Lcd.clearDisplay();
 }
