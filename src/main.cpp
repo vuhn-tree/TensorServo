@@ -16,8 +16,7 @@ int sensorPin = 36;         // set the input pin for the potentiometer.
 int last_sensorValue = 100; // Stores the value last read by the sensor.
 int cur_sensorValue = 0;    // Stores the value currently read by the sensor.
 
-void setup()
-{
+void setup() {
   M5.begin(true, true, true, true, kMBusModeInput);
   /* kMBusModeOutput, powered by USB or Battery
    kMBusModeInput, powered by outside input need to fill in this Otherwise M5Core2 will not work properly
@@ -29,9 +28,9 @@ void setup()
 
   pinMode(sensorPin, INPUT); // Sets the specified pin to input mode.
 
-  M5.Lcd.setCursor(220, 0, 4);
+  M5.Lcd.setCursor(100, 0, 4);
   M5.Lcd.setTextColor(TFT_GREEN, TFT_BLACK);
-  M5.Lcd.print("Servo3 richard");
+  M5.Lcd.print("Servo Core");
 
   // dacWrite(25, 0);
 }
@@ -62,9 +61,16 @@ void loop() {
   cur_sensorValue = analogRead(sensorPin); // read the value from the sensor.
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
 
+  M5.Lcd.setCursor(100, 100, 4);
+  char buf[20];
+  sprintf(buf, "%d%%", cur_sensorValue);
+  M5.Lcd.print(buf);
+  
+
   // first sensor value
   servo_angle_write(0, normalVal);
   servo_angle_write(15, normalVal);
 
+  M5.Lcd.clear();
   delay(100);
 }
