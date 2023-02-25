@@ -69,7 +69,7 @@ void loop() {
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
 
   M5.Lcd.setCursor(0, INFO_HEIGHT_POS, 4);
-  char buf[20];
+  char buf[50];
   sprintf(buf, "Raw Pot: %d%", cur_sensorValue);
   M5.Lcd.println(buf);
 
@@ -82,6 +82,6 @@ void loop() {
   servo_angle_write(15, normalVal);
 
   
-  delay(10);
+  delay(500);
   // M5.Lcd.clear();
 }
