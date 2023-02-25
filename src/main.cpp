@@ -16,6 +16,8 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
         // pulse of 512
 #define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
 
+const int INFO_HEIGHT_POS = 80;
+
 int sensorPin = 36;          // set the input pin for the potenti ometer.
 int last_sensorValue = 100;  // Stores the value last read by the sensor.
 int cur_sensorValue = 0;     // Stores the value currently read by the sensor.
@@ -66,12 +68,12 @@ void loop() {
   cur_sensorValue = analogRead(sensorPin);  // read the value from the sensor.
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
 
-  M5.Lcd.setCursor(100, 100, 4);
+  M5.Lcd.setCursor(0, INFO_HEIGHT_POS, 4);
   char buf[20];
   sprintf(buf, "Raw Pot: %d%", cur_sensorValue);
   M5.Lcd.println(buf);
 
-  M5.Lcd.setCursor(100, 120, 4);
+  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 20, 4);
   sprintf(buf, "Norm Pot: %d%", normalVal);
   M5.Lcd.println(buf);
   
