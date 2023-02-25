@@ -88,17 +88,15 @@ void loop() {
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
   M5.Lcd.println(buf);
 
-  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 75, 4);
-  M5.Lcd.printf("Button A: %d ",M5.BtnA.read());
-
-  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 100, 4);
+  // M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 75, 4);
   if(M5.BtnA.read()) {
-    
-    M5.Lcd.println("Sleeping...");
     M5.shutdown();  
+  } 
+
+  if(M5.BtnC.read()) {
+    // M5.Lcd.println("Sleeping...");
+    // M5.setWakeupButton();  
     // M5.Lcd.sleep();
-  } else {
-    M5.Lcd.println("");
   }
   
   // first sensor value
