@@ -74,19 +74,16 @@ void loop() {
   cur_sensorValue = analogRead(sensorPin);  // read the value from the sensor.
   const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
 
-  M5.Lcd.setCursor(0, INFO_HEIGHT_POS, 4);
   char buf[50];
   sprintf(buf, "Raw Pot:  %04d%", cur_sensorValue);
-  M5.Lcd.println(buf);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS, 4);
 
-  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 25, 4);
   sprintf(buf, "Norm Pot: %03d%", normalVal);
-  M5.Lcd.println(buf);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 25, 4);
 
   const float powerTemp = M5.Axp.GetTempInAXP192();
-  M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 50, 4);
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
-  M5.Lcd.println(buf);
+  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 50, 4);
 
   // M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 75, 4);
   if(M5.BtnA.read()) {
