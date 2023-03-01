@@ -15,7 +15,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver(0x40, Wire1);
         // pulse of 512
 #define SERVO_FREQ 50  // Analog servos run at ~50 Hz updates
 
-const int INFO_HEIGHT_POS = 25;
+const int DISP_OFFSET = 25;
 
 /**
  * Port A: ??
@@ -24,7 +24,7 @@ const int INFO_HEIGHT_POS = 25;
  */
 int sensorPin = 36;          // set the input pin for the potentiometer.
 int last_sensorValue = 100;  // Stores the value last read by the sensor.
-int cur_sensorValue = 0;     // Stores the value currently read by the sensor.
+int potVal = 0;     // Stores the value currently read by the sensor.
 
 void setup() {
   M5.begin(true, true, true, true, kMBusModeInput);
@@ -69,24 +69,24 @@ void servo_angle_write(uint8_t n, int Angle) {
 }
 
 void loop() {
-   M5.update();
+    M5.update();
 
   // mapped to pot
-  cur_sensorValue = analogRead(sensorPin);
-  const int normalVal = map(cur_sensorValue, 0, 4096, 0, 180);
+  potVal = analogRead(sensorPin);
+  const int normalVal = map(potVal, 0, 4096, 0, 180);
 
   char buf[50];
-  sprintf(buf, "Raw Pot:  %04d%", cur_sensorValue);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS, 4);
+  sprintf(buf, "Raw Pot:  %04d%", potVal);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET, 4);
 
   sprintf(buf, "Norm Pot: %03d%", normalVal);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 25, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET + 25, 4);
 
   const float powerTemp = M5.Axp.GetTempInAXP192();
   sprintf(buf, "Powr Temp: %2.1fC", powerTemp);
-  M5.Lcd.drawString(buf, 0, INFO_HEIGHT_POS + 50, 4);
+  M5.Lcd.drawString(buf, 0, DISP_OFFSET + 50, 4);
 
-  // M5.Lcd.setCursor(0, INFO_HEIGHT_POS + 75, 4);
+  // M5.Lcd.setCursor(0, DISP_OFFSET + 75, 4);
   if(M5.BtnA.read()) {
     M5.shutdown();  
   } 
